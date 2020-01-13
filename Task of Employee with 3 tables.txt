@@ -1,0 +1,82 @@
+Task 3:
+
+
+create table employee(
+empid number(2) primary key,
+empname varchar(15),
+deptid number(3),
+basic_salary number(7));
+
+
+create table department(
+deptid number(3),
+deptname varchar(15));
+----------------------------------------
+create table salaryslip(
+salaryid number(2),
+empid number(2),
+empname varchar(10),
+deptname varchar(15),
+basic_salary number(7),
+hra number(2),
+ta number(2),
+da number(2),
+total_salary number(8));
+-----------------------------------------------
+declare
+n number(2):= 1;
+e_id number(2);
+e_name varchar(10);
+d_id number(3);
+b_salary number(7);
+d_name varchar(15);
+t_salary number(8);
+hra number(2);
+ta number(2);
+da number(2);
+begin
+while ( n < 6)
+loop
+select employee.empid,employee.empname,department.deptname,employee.basic_salary
+into e_id,e_name,d_name,b_salary 
+from employee inner join department on
+employee.deptid = department.deptid where empid = n;
+if (basic_salary > 10000) then
+hra:= 20;
+ta:= 10;
+da:= 25;
+total_salary := basic_salary + ((basic_salary*hra)/100) + ((basic_salary*ta)/100) + ((basic_salary*da)/100);
+insert into salaryslip values(e_id,e_id,e_name,d_name,b_salary,hra,ta,da,t_salary);
+else
+hra:= 10;
+ta:= 5;
+da:= 15;
+total_salary := basic_salary + ((basic_salary*hra)/100) + ((basic_salary*ta)/100) + ((basic_salary*da)/100);
+insert into salaryslip values(e_id,e_id,e_name,d_name,b_salary,hra,ta,da,t_salary);
+end if;
+n:= n + 1;
+end loop;
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
