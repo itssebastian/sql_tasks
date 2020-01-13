@@ -1,0 +1,73 @@
+create table student(
+student_id number (2),
+student_name varchar(10),
+student_num number(10));
+
+insert 3 records
+--------------------PL/SQL-----------------------
+1st Exception  ' no_data_found ' 
+
+--
+declare
+	d student%rowtype;
+begin
+	select * into d from student where student_id = 4;
+		dbms_output.put_line(' ID ' || d.student_id);
+		dbms_output.put_line(' Name ' || d.student_name);
+exception
+	when no_data_found 
+	then
+		dbms_output.put_line('Check your data in the table');
+end;
+/
+
+
+
+2nd Exception ' too_many_rows'
+
+--
+declare
+	d varchar(10);
+begin
+	select  student_name into d from student;
+	dbms_output.put_line(' Name ' || d);
+exception
+	when too_many_rows
+	then
+		dbms_output.put_line('error Trying to select too many rows');
+end;
+/
+
+
+3rd Exception  ' value_error'
+
+--
+declare
+	d number(10);
+begin
+	select  student_name into d from student where student_id = 1;
+	dbms_output.put_line(' Name ' || d);
+exception
+	when value_error
+	then  dbms_output.put_line('Check your data type');
+end;
+/
+
+
+4th Exception ' Zero Divide'
+--
+
+declare
+	a number(2):= 80;
+	b number(2):= 0;
+begin
+	dbms_output.put_line(a/b);
+exception
+	when zero_divide
+	then 
+		dbms_output.put_line('dividing by zero please check the values again'); 
+		dbms_output.put_line('the value of a is '||a); 
+		dbms_output.put_line('the value of b is '||b); 
+end;
+/
+
