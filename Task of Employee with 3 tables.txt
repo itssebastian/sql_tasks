@@ -1,17 +1,21 @@
-Task 3:
+Task 3: Inserting into 3rd table from 1st and 2nd Table using joins in PL/SQL blocks and calculating HRA,TA,DA using loop and if else condition.
 
-
+                    Creating 1st Table:
+--
 create table employee(
 empid number(2) primary key,
 empname varchar(15),
 deptid number(3),
 basic_salary number(7));
 
-
+                    Creating 2nd Table
+--
 create table department(
 deptid number(3),
 deptname varchar(15));
-----------------------------------------
+--
+                    Creating 3rd Table
+                    
 create table salaryslip(
 salaryid number(2),
 empid number(2),
@@ -22,8 +26,10 @@ hra number(2),
 ta number(2),
 da number(2),
 total_salary number(8));
------------------------------------------------
+
+ -----------------------------------------IN PL/SQL BLOCK-----------------------------------------------
 declare
+
 n number(2):= 1;
 e_id number(2);
 e_name varchar(10);
@@ -34,6 +40,7 @@ t_salary number(8);
 hra number(2);
 ta number(2);
 da number(2);
+
 begin
 while ( n < 6)
 loop
@@ -42,17 +49,17 @@ into e_id,e_name,d_name,b_salary
 from employee inner join department on
 employee.deptid = department.deptid where empid = n;
 if (basic_salary > 10000) then
-hra:= 20;
-ta:= 10;
-da:= 25;
-total_salary := basic_salary + ((basic_salary*hra)/100) + ((basic_salary*ta)/100) + ((basic_salary*da)/100);
-insert into salaryslip values(e_id,e_id,e_name,d_name,b_salary,hra,ta,da,t_salary);
+  hra:= 20;
+  ta:= 10;
+  da:= 25;
+  total_salary := basic_salary + ((basic_salary*hra)/100) + ((basic_salary*ta)/100) + ((basic_salary*da)/100);
+  insert into salaryslip values(e_id,e_id,e_name,d_name,b_salary,hra,ta,da,t_salary);
 else
-hra:= 10;
-ta:= 5;
-da:= 15;
-total_salary := basic_salary + ((basic_salary*hra)/100) + ((basic_salary*ta)/100) + ((basic_salary*da)/100);
-insert into salaryslip values(e_id,e_id,e_name,d_name,b_salary,hra,ta,da,t_salary);
+  hra:= 10;
+  ta:= 5;
+  da:= 15;
+  total_salary := basic_salary + ((basic_salary*hra)/100) + ((basic_salary*ta)/100) + ((basic_salary*da)/100);
+  insert into salaryslip values(e_id,e_id,e_name,d_name,b_salary,hra,ta,da,t_salary);
 end if;
 n:= n + 1;
 end loop;
@@ -60,23 +67,4 @@ end;
 /
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---------------------------------------------------------------END---------------------------------------------------
