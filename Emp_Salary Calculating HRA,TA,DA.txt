@@ -1,7 +1,7 @@
-Create a table emp_salary with fields (emp_id,emp_name,basic_salary,HRA  ,  DA  ,  TA  , total_amount)
+Create a table emp_salary with fields (emp_id,emp_name,basic_salary,HRA  ,  DA  ,  TA  , total_amount) hra(20%) da(25%) ta (10%)
 
-hra 20% da 25% ta 10%
-
+Creating Table:
+--
 create table emp_salary(
 emp_id number(2),
 emp_name char(10),
@@ -12,6 +12,8 @@ TA number(2),
 total_amount number(8));
 
 set serveroutput on
+
+-- PL/Sql--
 
 declare
 id emp_salary.emp_id%TYPE;
