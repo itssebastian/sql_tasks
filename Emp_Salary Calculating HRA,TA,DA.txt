@@ -1,0 +1,34 @@
+Create a table emp_salary with fields (emp_id,emp_name,basic_salary,HRA  ,  DA  ,  TA  , total_amount)
+
+hra 20% da 25% ta 10%
+
+create table emp_salary(
+emp_id number(2),
+emp_name char(10),
+basic_salary number(20),
+HRA number(2),
+DA number(2),
+TA number(2),
+total_amount number(8));
+
+set serveroutput on
+
+declare
+id emp_salary.emp_id%TYPE;
+name emp_salary.emp_name%TYPE;
+salary emp_salary.basic_salary%TYPE;
+hra emp_salary.HRA%TYPE;
+da emp_salary.DA%TYPE;
+ta emp_salary.TA%TYPE;
+amount emp_salary.total_amount%TYPE;
+begin
+id:= &ID;
+name:= '&NAME';
+salary:= &SALARY;
+hra:= &HRA;
+da:= &DA;
+ta:= &TA;
+amount:= salary +( (salary * hra)/100) + ( (salary * da)/100) +( (salary * ta)/100);
+insert into emp_salary values(id,name,salary,hra,da,ta,amount);
+end;
+/
